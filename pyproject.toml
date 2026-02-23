@@ -9,5 +9,7 @@ dependencies = [
     "groq>=1.0.0",
     "pandas>=2.3.3",
     "pymupdf>=1.27.1",
+    "pypdf2>=3.0.1",
+    "python-dotenv>=1.2.1",
     "streamlit>=1.54.0",
 ]
