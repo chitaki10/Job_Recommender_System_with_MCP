@@ -7,7 +7,7 @@
 ![MCP](https://img.shields.io/badge/MCP-Tool%20Server-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
-> Upload your résumé and get **AI-powered job recommendations**, skill
+> Upload your resume and get **AI-powered job recommendations**, skill
 > gap analysis, and a personalized career roadmap --- powered by Groq
 > LLaMA 3.3-70B and real-time job listings from LinkedIn & Naukri via
 > Apify.
