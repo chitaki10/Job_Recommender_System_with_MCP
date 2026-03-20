@@ -17,7 +17,7 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ------------------------------------------------------------------------
 
-## 📌 Table of Contents
+## Table of Contents
 
 -   Features
 -   Architecture
