@@ -79,7 +79,7 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
   ----------------- --------------------------------------
   UI                Streamlit
   LLM               Groq API --- llama-3.3-70b-versatile
-  PDF Parsing       PyMuPDF (fitz)
+  PDF Parsing       PyMuPDF 
   Job Scraping      Apify
   MCP Server        mcp Python SDK
   Package Manager   uv
