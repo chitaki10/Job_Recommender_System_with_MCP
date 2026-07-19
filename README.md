@@ -4,8 +4,7 @@
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?logo=streamlit)
 ![Groq](https://img.shields.io/badge/LLM-Groq%20LLaMA3.3--70B-orange?logo=groq)
 ![Apify](https://img.shields.io/badge/Jobs%20API-Apify-00B4D8?logo=apify)
-![MCP](https://img.shields.io/badge/MCP-Tool%20Server-blueviolet)
-![License](https://img.shields.io/badge/License-MIT-green)
+
 
 > Upload your resume and get **AI-powered job recommendations**, skill
 > gap analysis, and a personalized career roadmap --- powered by Groq
