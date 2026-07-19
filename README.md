@@ -1,4 +1,4 @@
-# 💼 AI Job Recommender System with MCP
+#  AI Job Recommender System with MCP
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.x-FF4B4B?logo=streamlit)
@@ -31,25 +31,25 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ------------------------------------------------------------------------
 
-## ✨ Features
+##  Features
 
--   📄 Resume Parsing --- Extracts raw text from uploaded PDF résumés
+-    Resume Parsing --- Extracts raw text from uploaded PDF résumés
     using PyMuPDF\
--   🧠 Resume Summary --- LLM summarizes your skills, experience, and
+-    Resume Summary --- LLM summarizes your skills, experience, and
     profile in seconds\
--   🔍 Skill Gap Analysis --- Identifies missing skills, certifications,
+-    Skill Gap Analysis --- Identifies missing skills, certifications,
     and areas to improve\
--   🗺️ Career Roadmap --- Personalized 6--12 month plan: skills to
+-    Career Roadmap --- Personalized 6--12 month plan: skills to
     learn, projects to build, certs to pursue\
--   💼 Real-Time Job Recommendations --- Fetches live jobs from LinkedIn
+-    Real-Time Job Recommendations --- Fetches live jobs from LinkedIn
     and Naukri via Apify API\
--   🔧 MCP Tool Server --- Core functions exposed as MCP tools
+-    MCP Tool Server --- Core functions exposed as MCP tools
 
 ------------------------------------------------------------------------
 
-## 🏗️ Architecture
+##  Architecture
 
-    User uploads Résumé (PDF)
+    user uploads Résumé (PDF)
     │
     ▼
     Extract PDF Text (PyMuPDF)
@@ -73,7 +73,7 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ------------------------------------------------------------------------
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
   Component         Technology
   ----------------- --------------------------------------
@@ -87,9 +87,9 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ------------------------------------------------------------------------
 
-## 🚀 Getting Started
+##  Getting Started
 
-### Clone Repository
+### clone Repository
 
 ``` bash
 git clone https://github.com/chitaki10/Job_Recommender_System_with_MCP.git
@@ -116,7 +116,7 @@ uv run streamlit run app.py
 
 ------------------------------------------------------------------------
 
-## 🔧 MCP Tool Server
+##  MCP Tool Server
 
 Run MCP server:
 
@@ -139,7 +139,7 @@ Available tools:
 
 ------------------------------------------------------------------------
 
-## 📁 Project Structure
+##  Project Structure
 
     Job_Recommender_System_with_MCP/
     │
@@ -156,7 +156,7 @@ Available tools:
 
 ------------------------------------------------------------------------
 
-## 📊 Results
+##  Results
 
 -   Resume summary generated in seconds\
 -   Skill gap analysis provided\
@@ -170,3 +170,4 @@ Available tools:
 ## 🙋 Contact
 
 GitHub: https://github.com/chitaki10
+chitakin876@gmail.com
