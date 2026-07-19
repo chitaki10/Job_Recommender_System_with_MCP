@@ -8,8 +8,8 @@ st.set_page_config(
     layout="wide"
 )
 
-# ─── Header ────────────────────────────────────────────────────────────────────
-st.title("💼 AI Job Recommender")
+
+st.title("AI Job Recommender")
 st.markdown(
     "> Upload your resume and get **AI-powered** job recommendations, "
     "skill gap analysis, and a personalized career roadmap."
