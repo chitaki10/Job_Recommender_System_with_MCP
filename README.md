@@ -167,7 +167,7 @@ Available tools:
 
 ------------------------------------------------------------------------
 
-## 🙋 Contact
+## Contact
 
 GitHub: https://github.com/chitaki10
 chitakin876@gmail.com
