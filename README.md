@@ -69,7 +69,7 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
     │
     └──────────────┬───────────────┘
     ▼
-    Job Recommendations UI
+    Job Recommendations ui
 
 ------------------------------------------------------------------------
 
