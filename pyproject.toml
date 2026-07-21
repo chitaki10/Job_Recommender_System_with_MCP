@@ -7,9 +7,15 @@ requires-python = ">=3.12"
 dependencies = [
     "apify-client>=2.5.0",
     "groq>=1.0.0",
+    "mcp[cli]>=1.26.0",
     "pandas>=2.3.3",
     "pymupdf>=1.27.1",
-    "pypdf2>=3.0.1",
     "python-dotenv>=1.2.1",
     "streamlit>=1.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-mock>=3.15.1",
 ]

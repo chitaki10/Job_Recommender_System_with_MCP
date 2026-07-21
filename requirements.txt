@@ -1,5 +1,0 @@
-streamlit
-groq
-pandas
-pymupdf
-apify-client
