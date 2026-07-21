@@ -1,12 +1,31 @@
-import streamlit as st
-from src.helper import extract_text_from_pdf, ask_groq, fetch_linkedin_jobs, fetch_naukri_jobs
+import logging
+import os
 
-# ─── Page Config ───────────────────────────────────────────────────────────────
+import streamlit as st
+
+# ─── Page Config (must be the first Streamlit call) ────────────────────────────
 st.set_page_config(
     page_title="AI Job Recommender",
     page_icon="💼",
     layout="wide"
 )
+
+logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
+
+try:
+    from src.config import ConfigError
+    from src.helper import (
+        JobFetchError,
+        LLMError,
+        ask_groq,
+        extract_job_title,
+        extract_text_from_pdf,
+        fetch_linkedin_jobs,
+        fetch_naukri_jobs,
+    )
+except ConfigError as e:
+    st.error(f"⚠️ Configuration error: {e}")
+    st.stop()
 
 # ─── Header ────────────────────────────────────────────────────────────────────
 st.title("💼 AI Job Recommender")
@@ -31,19 +50,22 @@ def main():
         help="Supported format: PDF. Max size: 10MB."
     )
 
-    if uploaded_file:
-        # ── Step 1: Extract ──────────────────────────────────────────────────
-        with st.spinner("📖 Extracting text from your resume..."):
-            resume_text = extract_text_from_pdf(uploaded_file)
+    if not uploaded_file:
+        return
 
-        if not resume_text or len(resume_text.strip()) < 50:
-            st.error("⚠️ Could not extract enough text. Is your PDF scanned? Try a text-based PDF.")
-            st.stop()
+    # ── Step 1: Extract ──────────────────────────────────────────────────
+    with st.spinner("📖 Extracting text from your resume..."):
+        resume_text = extract_text_from_pdf(uploaded_file)
 
-        st.success("✅ Resume parsed successfully!")
-        st.divider()
+    if not resume_text or len(resume_text.strip()) < 50:
+        st.error("⚠️ Could not extract enough text. Is your PDF scanned? Try a text-based PDF.")
+        st.stop()
 
-        # ── Step 2: Resume Summary ───────────────────────────────────────────
+    st.success("✅ Resume parsed successfully!")
+    st.divider()
+
+    # ── Step 2: Resume Summary ───────────────────────────────────────────
+    try:
         with st.spinner("🧠 Summarizing your resume..."):
             summary = ask_groq(
                 f"Summarize this resume. Highlight key skills, years of experience, "
@@ -51,8 +73,11 @@ def main():
                 max_tokens=500
             )
         display_section("🧠", "Resume Summary", summary)
+    except LLMError as e:
+        st.error(f"⚠️ Could not generate resume summary: {e}")
 
-        # ── Step 3: Skill Gap Analysis ───────────────────────────────────────
+    # ── Step 3: Skill Gap Analysis ───────────────────────────────────────
+    try:
         with st.spinner("🔍 Analyzing skill gaps..."):
             skill_gap = ask_groq(
                 f"Analyze this resume and identify:\n"
@@ -64,8 +89,11 @@ def main():
                 max_tokens=500
             )
         display_section("🔍", "Skill Gap Analysis", skill_gap)
+    except LLMError as e:
+        st.error(f"⚠️ Could not analyze skill gaps: {e}")
 
-        # ── Step 4: Career Roadmap ────────────────────────────────────────────
+    # ── Step 4: Career Roadmap ────────────────────────────────────────────
+    try:
         with st.spinner("🗺️ Building your career roadmap..."):
             roadmap = ask_groq(
                 f"Based on this resume, create a 6–12 month career improvement roadmap:\n"
@@ -77,38 +105,61 @@ def main():
                 max_tokens=500
             )
         display_section("🗺️", "Career Roadmap", roadmap)
+    except LLMError as e:
+        st.error(f"⚠️ Could not build career roadmap: {e}")
 
-        # ── Step 5: Job Recommendations ──────────────────────────────────────
-        st.divider()
-        st.markdown("### 💼 Job Recommendations")
+    # ── Step 5: Job Recommendations ──────────────────────────────────────
+    st.divider()
+    st.markdown("### 💼 Job Recommendations")
 
+    job_title = None
+    try:
+        with st.spinner("🎯 Identifying your target job title..."):
+            job_title = extract_job_title(resume_text)
+        st.caption(f"Searching jobs for: **{job_title}**")
+    except LLMError as e:
+        st.warning(f"⚠️ Could not determine a target job title, skipping live job search: {e}")
+
+    if job_title:
         col1, col2 = st.columns(2)
 
         with col1:
-            with st.spinner("🔗 Fetching LinkedIn jobs..."):
-                linkedin_jobs = fetch_linkedin_jobs(resume_text)
             with st.container(border=True):
                 st.markdown("#### 🔗 LinkedIn Matches")
-                if linkedin_jobs:
-                    for job in linkedin_jobs:
-                        st.markdown(f"- **{job.get('title', 'N/A')}** at {job.get('company', 'N/A')} — [Apply]({job.get('url', '#')})")
-                else:
-                    st.info("No LinkedIn jobs fetched. Check your API integration.")
+                try:
+                    with st.spinner("🔗 Fetching LinkedIn jobs..."):
+                        linkedin_jobs = fetch_linkedin_jobs(job_title)
+                    if linkedin_jobs:
+                        for job in linkedin_jobs:
+                            st.markdown(
+                                f"- **{job.get('title', 'N/A')}** at {job.get('company', 'N/A')} "
+                                f"— [Apply]({job.get('url', '#')})"
+                            )
+                    else:
+                        st.info("No LinkedIn jobs found for this title.")
+                except JobFetchError as e:
+                    st.error(f"⚠️ LinkedIn fetch failed: {e}")
 
         with col2:
-            with st.spinner("🏢 Fetching Naukri jobs..."):
-                naukri_jobs = fetch_naukri_jobs(resume_text)
             with st.container(border=True):
                 st.markdown("#### 🏢 Naukri Matches")
-                if naukri_jobs:
-                    for job in naukri_jobs:
-                        st.markdown(f"- **{job.get('title', 'N/A')}** at {job.get('company', 'N/A')} — [Apply]({job.get('url', '#')})")
-                else:
-                    st.info("No Naukri jobs fetched. Check your API integration.")
+                try:
+                    with st.spinner("🏢 Fetching Naukri jobs..."):
+                        naukri_jobs = fetch_naukri_jobs(job_title)
+                    if naukri_jobs:
+                        for job in naukri_jobs:
+                            st.markdown(
+                                f"- **{job.get('title', 'N/A')}** at {job.get('company', 'N/A')} "
+                                f"— [Apply]({job.get('url', '#')})"
+                            )
+                    else:
+                        st.info("No Naukri jobs found for this title.")
+                except JobFetchError as e:
+                    st.error(f"⚠️ Naukri fetch failed: {e}")
 
-        # ── Footer ────────────────────────────────────────────────────────────
-        st.divider()
-        st.caption("⚡ Powered by Groq LLM · Built with Streamlit · AI Job Recommender v1.0")
+    # ── Footer ────────────────────────────────────────────────────────────
+    st.divider()
+    st.caption("⚡ Powered by Groq LLM · Built with Streamlit · AI Job Recommender v1.0")
 
 
 if __name__ == "__main__":
