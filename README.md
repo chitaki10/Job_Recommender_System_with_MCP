@@ -114,9 +114,11 @@ uv add -r requirements.txt
 uv run streamlit run app.py
 ```
 
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
 
 ##  MCP Tool Server
+
+
 
 Run MCP server:
 
@@ -162,6 +164,7 @@ Available tools:
 -   Skill gap analysis provided\
 -   Career roadmap generated\
 -   120 real-time jobs fetched
+-   get your dream job
 
 ------------------------------------------------------------------------
 
