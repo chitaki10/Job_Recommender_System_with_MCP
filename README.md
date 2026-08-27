@@ -33,17 +33,17 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ##  Features
 
--    Resume Parsing --- Extracts raw text from uploaded PDF résumés
+-    Resume Parsing -- Extracts raw text from uploaded PDF résumés
     using PyMuPDF\
--    Resume Summary --- LLM summarizes your skills, experience, and
+-    Resume Summary -- LLM summarizes your skills, experience, and
     profile in seconds\
--    Skill Gap Analysis --- Identifies missing skills, certifications,
+-    Skill Gap Analysis -- Identifies missing skills, certifications,
     and areas to improve\
--    Career Roadmap --- Personalized 6--12 month plan: skills to
+-    Career Roadmap -- Personalized 6--12 month plan: skills to
     learn, projects to build, certs to pursue\
 -    Real-Time Job Recommendations --- Fetches live jobs from LinkedIn
     and Naukri via Apify API\
--    MCP Tool Server --- Core functions exposed as MCP tools
+-    MCP Tool Server -- Core functions exposed as MCP tools
 
 ------------------------------------------------------------------------
 
