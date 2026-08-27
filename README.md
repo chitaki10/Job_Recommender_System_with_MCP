@@ -17,6 +17,7 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 
 ------------------------------------------------------------------------
 
+
 ## Table of contents
 
 -   Features
@@ -32,6 +33,8 @@ https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
 ------------------------------------------------------------------------
 
 ##  Features
+
+# Extracts text content from uploaded PDF using PyMuPDF
 
 -    Resume Parsing --- Extracts raw text from uploaded PDF résumés
     using PyMuPDF\
