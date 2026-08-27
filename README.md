@@ -10,7 +10,7 @@
 > Upload your resume and get **AI-powered job recommendations**, skill
 > gap analysis, and a personalized career roadmap --- powered by Groq
 > LLaMA 3.3-70B and real-time job listings from LinkedIn & Naukri via
-> Apify.
+
 
 🔗 **Live Demo:**\
 https://chitaki10-job-recommender-system-with-mcp-app-eynbly.streamlit.app
